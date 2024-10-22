@@ -1,0 +1,145 @@
+
+<%- include('../layouts/admin/header') %>
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <%- include('../layouts/admin/sidebar') %>
+
+   <!-- Layout container -->
+   <div class="layout-page">
+    <!-- Navbar -->
+    <%- include('../layouts/admin/nav') %>
+    <div class="content-wrapper">
+      <!-- Content -->
+
+      <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="app-ecommerce-category">
+          <!-- Category List Table -->
+          <div class="card">
+            <div class="card-datatable table-responsive">
+              <table class="datatables-category-list table border-top">
+                <thead>
+                  <tr>
+                    <th>index</th>
+                    <th>CATEGORIES</th>
+                    <th>SUB CATEGORIES</th>
+                    <th>ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% subCategories.forEach((cat, index) => { %>
+                    <tr>
+                      <td><%= index + 1  %></td>
+                      <td><%= cat['category.category_name'] %></td>
+                      <td><%= cat.sub_category_name %></td>
+                      <td>
+                        <div class="dropdown">
+                          <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <i class="ti ti-dots-vertical"></i>
+                          </button>
+                          <div class="dropdown-menu">
+                            <button class="dropdown-item" href="javascript:;"><i class="ti ti-pencil me-1"></i>Edit</button>
+                            <button class="dropdown-item" href="javascript:void(0);"><i class="ti ti-trash me-1"></i> Delete</button>
+                          </div>
+                        </div>
+                      </td>
+
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Offcanvas to add new customer -->
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEcommerceCategoryList" aria-labelledby="offcanvasEcommerceCategoryListLabel">
+            <!-- Offcanvas Header -->
+            <div class="offcanvas-header py-6">
+              <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">Add Sub Category</h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <!-- Offcanvas Body -->
+            <div class="offcanvas-body border-top">
+                <form class="add-new-record pt-0 row g-2" id="form-add-new-record" onsubmit="return false">
+                    <div class="col-sm-12">
+                      <label class="form-label" for="basicPost">Category</label>
+                      <div class="input-group input-group-merge">
+                        <span id="basicPost2" class="input-group-text"><i class="fa fa-time"></i></span>
+                        <select name="Category" id="Category" class="form-control dt-full-name">
+                          <option value="">Select category</option>
+                          <% category.forEach(ca => { %>
+                            <option value="<%= ca.id %>"><%= ca.category_name %></option>
+                          <% }); %>
+                        </select>
+                        <!-- <input type="text" id="timeline" name="timeline" class="form-control dt-post" placeholder="Time line" aria-label="Web Developer" /> -->
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <label class="form-label" for="basicEmail"> sub Category</label>
+                      <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="ti ti-briefcase"></i></span>
+                        <input type="text" id="sub_category" name="sub_category" class="form-control dt-name" placeholder="Sub category" aria-label="" />
+                      </div>
+                      <div class="form-text"> product category</div>
+                    </div>
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-primary data-submit me-sm-4 me-1">
+                          <span class="spinner-border" role="status" aria-hidden="true"></span>&nbsp;
+                          Submit
+                      </button>
+                      <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Cancel</button>
+                    </div>
+                  </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / Content -->
+    <%- include('../layouts/admin/copywrite') %>
+
+    <%- include('../layouts/admin/footer') %>
+    <script src="/asset/js/app-ecommerce-category-list.js"></script>
+    <script>
+        if(document.getElementById("form-add-new-record")) {
+            $(".spinner-border").hide()
+            const dt = document.getElementById("form-add-new-record");
+            dt.addEventListener("submit", async function(e) {
+                e.preventDefault();
+                $(".spinner-border").show()
+                const data = new FormData(dt);
+                const payload = {
+                  category: data.get("Category"),
+                  sub_category: data.get("sub_category")
+                }
+
+                console.log(payload)
+
+                try {
+                    const request = await fetch('/add/sub-category', {
+                        method: "post",
+                        body: JSON.stringify(payload),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    const response = await request.json()
+                    $(".spinner-border").hide()
+                    if(response.status == true) {
+                        toastr.success(response.message);
+                        setTimeout(() => {
+                          location.reload()
+                        }, "3000");
+                    } else {
+                        // for errors - red box
+                        toastr.error(response.message);
+                    }
+                } catch (error) {
+                    $(".spinner-border").hide()
+                    // for errors - red box
+                    toastr.error(error.message);
+                }
+            })
+        }
+    </script>

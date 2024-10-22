@@ -1,0 +1,357 @@
+<%- include('../layouts/auths/head') %>
+<style>
+
+ /* Add a green text color and a checkmark when the requirements are right */
+ .valid {
+     color: green;
+ }
+
+ .valid:before {
+     position: relative;
+     left: -35px;
+     content: "✔";
+ }
+
+ /* Add a red text color and an "x" when the requirements are wrong */
+ .invalid {
+     color: red;
+ }
+
+ .invalid:before {
+     position: relative;
+     left: -10px;
+     content: "✖";
+ }
+</style>
+  <!-- Content -->
+
+  <div class="authentication-wrapper authentication-cover">
+    <!-- Logo -->
+    <a href="index.html" class="app-brand auth-cover-brand">
+      <span class="app-brand-logo demo">
+        <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
+            fill="#7367F0" />
+          <path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd"
+            d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z" fill="#161616" />
+          <path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd"
+            d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z" fill="#161616" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
+            fill="#7367F0" />
+        </svg>
+      </span>
+      <span class="app-brand-text demo text-heading fw-bold">E-lab</span>
+    </a>
+    <!-- /Logo -->
+    <div class="authentication-inner row m-0">
+      <!-- /Left Text -->
+      <div class="d-none d-lg-flex col-lg-7 p-0">
+        <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
+          <img src="/asset/img/illustrations/auth-register-illustration-light.png" alt="auth-register-cover"
+            class="my-5 auth-illustration" data-app-light-img="illustrations/auth-register-illustration-light.png"
+            data-app-dark-img="illustrations/auth-register-illustration-dark.png" />
+
+          <img src="/asset/img/illustrations/bg-shape-image-light.png" alt="auth-register-cover" class="platform-bg"
+            data-app-light-img="illustrations/bg-shape-image-light.png"
+            data-app-dark-img="illustrations/bg-shape-image-dark.png" />
+        </div>
+      </div>
+      <!-- /Left Text -->
+
+      <!-- Register -->
+      <div class="d-flex col-12 col-lg-5 align-items-center authentication-bg p-sm-12 p-6">
+        <div class="w-px-600 mx-auto mt-2 pt-3">
+          <h4 class="mb-1">Adventure starts here 🚀</h4>
+          <!-- <p class="mb-6">Make your app management easy and fun!</p> -->
+
+          <form id="form" class="mb-6">
+            <!-- <div class="mb-6">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username"
+                autofocus />
+            </div> -->
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="username" class="form-label">surname</label>
+                  <input type="text" class="form-control" id="surname" name="surname"
+                    placeholder="Enter your surname" required />
+                </div>
+                <div class="mb-3">
+                  <label for="username" class="form-label">firstname</label>
+                  <input type="text" class="form-control" id="firstname" name="firstname"
+                    placeholder="Enter your firstname" required/>
+                </div>
+              </div>
+              <div class="col-6">
+
+                <div class="mb-3">
+                  <label for="username" class="form-label">middlename</label>
+                  <input type="text" class="form-control" id="middlename" name="middlename"
+                    placeholder="Enter your middlename" />
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Phone No</label>
+                  <input type="text" class="form-control" id="user_phone" name="user_phone"
+                    placeholder="Enter your phone number" required/>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email" />
+              </div>
+              <div class="col-6">
+                <div class="mb-3 form-password-toggle">
+                  <label class="form-label" for="password">Password</label>
+                  <div class="input-group input-group-merge pb-2">
+                    <input type="password" id="password" class="form-control" name="password"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password" required/>
+                    <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                  </div>
+
+                  <div id="message">
+                    <div id="capital" class="invalid">
+                        Contain atleast 1 uppercase
+                    </div>
+                    <div id="letter" class="invalid">
+                        Contain atleast 1 lowercase
+                    </div>
+                    <div id="number" class="invalid">
+                        Contain numerical charater
+                    </div>
+                    <div id="length" class="invalid">
+                        Minimum <b>8 characters</b>
+                    </div>
+                </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3 form-password-toggle">
+                  <label class="form-label" for="password">Confirm Password</label>
+                  <div class="input-group input-group-merge pb-2">
+                    <input type="password" id="confirmed" class="form-control" name="confirmed"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password" oninput="confirmPass()" required/>
+                    <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                  </div>
+                  <div id="check4" style="color: red;">
+                      Password Match
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <div class="mb-3 mt-2">
+              <div class="form-check mb-8 ms-2">
+                <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                <label class="form-check-label" for="terms-conditions">
+                  I agree to
+                  <a href="javascript:void(0);">privacy policy & terms</a>
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary d-grid w-100" id="sub">Sign up</button>
+          </form>
+
+          <p class="text-center">
+            <span>Already have an account?</span>
+            <a href="/console/login">
+              <span>Sign in instead</span>
+            </a>
+          </p>
+
+          <div class="divider my-6">
+            <div class="divider-text">or</div>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <a href="javascript:;" class="btn btn-sm btn-icon rounded-pill btn-text-facebook me-1_5">
+              <i class="tf-icons ti ti-brand-facebook-filled"></i>
+            </a>
+
+            <a href="javascript:;" class="btn btn-sm btn-icon rounded-pill btn-text-twitter me-1_5">
+              <i class="tf-icons ti ti-brand-twitter-filled"></i>
+            </a>
+
+            <a href="javascript:;" class="btn btn-sm btn-icon rounded-pill btn-text-github me-1_5">
+              <i class="tf-icons ti ti-brand-github-filled"></i>
+            </a>
+
+            <a href="javascript:;" class="btn btn-sm btn-icon rounded-pill btn-text-google-plus">
+              <i class="tf-icons ti ti-brand-google-filled"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- /Register -->
+    </div>
+  </div>
+
+  <!-- / Content -->
+
+
+  <%- include('../layouts/auths/footer') %>
+  
+  <script src="/sweetAlert.js"></script>
+    <script>
+        document.getElementById('sub').disabled = true;
+        var myInput = document.getElementById("password");
+        var letter = document.getElementById("letter");
+        var capital = document.getElementById("capital");
+        var number = document.getElementById("number");
+        var length = document.getElementById("length");
+
+        
+
+        const resetPassword =  document.getElementById("resetPassword");;
+
+
+        // When the user clicks on the password field, show the message box
+        myInput.onfocus = function() {
+            document.getElementById("message").style.display = "block";
+        }
+
+        // When the user clicks outside of the password field, hide the message box
+        myInput.onblur = function() {
+            document.getElementById("message").style.display = "none";
+        }
+            // When the user starts to type something inside the password field
+
+        document.getElementById("password").addEventListener("keyup", PWD)
+        function PWD() {
+        // Validate lowercase letters
+         console.log(myInput.value)
+            var lowerCaseLetters = /[a-z]/g;
+            if(myInput.value.match(lowerCaseLetters)) {
+                letter.classList.remove("invalid");
+                letter.classList.add("valid");
+            } else {
+                letter.classList.remove("valid");
+                letter.classList.add("invalid");
+                // document.getElementById('sub').disabled = true
+            }
+
+            // Validate capital letters
+            var upperCaseLetters = /[A-Z]/g;
+            if(myInput.value.match(upperCaseLetters)) {
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+            } else {
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+                // document.getElementById('sub').disabled = true
+            }
+
+
+            // Validate capital letters
+            // var specialCharater = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g;
+            // if(myInput.value.match(specialCharater)) {
+            //     specail.classList.remove("invalid");
+            //     specail.classList.add("valid");
+            // } else {
+            //     specail.classList.remove("valid");
+            //     specail.classList.add("invalid");
+            //     // document.getElementById('sub').disabled = true
+            // }
+
+
+            // Validate numbers
+            var numbers = /[0-9]/g;
+            if(myInput.value.match(numbers)) {
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+            } else {
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+                // document.getElementById('sub').disabled = true
+            }
+
+            // Validate length
+            if(myInput.value.length >= 8) {
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+            } else {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+                // document.getElementById('sub').disabled = true
+            }
+        }
+
+
+        // document.getElementById('sub').disabled = true;
+        
+        // resetPassword.style.display = "none"
+        function confirmPass() {
+            const password = document.getElementById('password').value;
+            const input = document.getElementById('confirmed').value;
+
+            if (password == input) {
+                document.getElementById("sub").removeAttribute("disabled");
+                document.getElementById('check4').style = "color: green";
+                resetPassword.style.display = "block"
+                
+            } else {
+                document.getElementById("sub").setAttribute("disabled", "");
+                document.getElementById('check4').style = "color: red";
+                resetPassword.style.display = "none"
+            }
+        }
+
+
+      const form = document.querySelector('form')
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const data = new FormData(form);
+        const payloads = {
+          // username: data.get("username"),
+          email: data.get("email"),
+          surname: data.get("surname"),
+          firstname: data.get("firstname"),
+          middlename: data.get("middlename"),
+          user_phone: data.get("user_phone"),
+          password: data.get("password"),
+          confirmed: data.get("confirmed")
+        };
+        // console.log(payloads);
+        try {
+          const response = await fetch("/create", {
+            method: "POST",
+            body: JSON.stringify(payloads),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          const res = await response.json();
+         
+          if (res.status == false) {
+            console.log(res)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: res.message == "Validation error" ? "User with this email already exist": res.message,
+            })
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Account created',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            location.assign(`/`)
+        }
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.message,
+          });
+        }
+      });
+    </script>
